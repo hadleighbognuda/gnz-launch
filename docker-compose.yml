@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  flutter-app:
+    build: .
+    container_name: glider-tow-flutter
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./flutter_app:/app
+    environment:
+      - FLUTTER_WEB_AUTO_DETECT=true
+    command: bash -c "cd flutter_app && flutter run -d web-server --web-port 8080 --web-hostname 0.0.0.0"
+    networks:
+      - flutter-network
+
+  # Development service with hot reload
+  flutter-dev:
+    build: .
+    container_name: glider-tow-flutter-dev
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./flutter_app:/app
+    environment:
+      - FLUTTER_WEB_AUTO_DETECT=true
+    command: bash -c "cd flutter_app && flutter run -d web-server --web-port 8080 --web-hostname 0.0.0.0" --hot
+    networks:
+      - flutter-network
+    profiles:
+      - dev
+
+networks:
+  flutter-network:
+    driver: bridge

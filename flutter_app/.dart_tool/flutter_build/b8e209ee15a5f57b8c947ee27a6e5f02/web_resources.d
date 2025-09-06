@@ -1,0 +1,1 @@
+ build/web/manifest.json:  /home/hadleigh/projects/gnz-launch/flutter_app/web/index.html /home/hadleigh/projects/gnz-launch/flutter_app/web/manifest.json
