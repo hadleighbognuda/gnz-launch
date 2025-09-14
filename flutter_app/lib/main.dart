@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/flight_provider.dart';
-import 'screens/home_screen.dart';
+import 'providers/auth_provider.dart';
+import 'widgets/auth_wrapper.dart';
 
 void main() {
   runApp(const GliderTowApp());
@@ -12,8 +13,11 @@ class GliderTowApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => FlightProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AuthProvider()),
+        ChangeNotifierProvider(create: (context) => FlightProvider()),
+      ],
       child: MaterialApp(
         title: 'Glider Tow Registration',
         theme: ThemeData(
@@ -47,7 +51,7 @@ class GliderTowApp extends StatelessWidget {
             hintStyle: const TextStyle(fontSize: 18),
           ),
         ),
-        home: const HomeScreen(),
+        home: const AuthWrapper(),
         debugShowCheckedModeBanner: false,
       ),
     );
